@@ -1,4 +1,5 @@
 import type { BoardState, GameRow, GuessItem, ItemKind } from "../types";
+import { getSpotifyTrackLabel } from "./spotify";
 
 export const createGuessItems = (rows: GameRow[]) =>
   rows.reduce<Record<string, GuessItem>>((items, row) => {
@@ -11,7 +12,7 @@ export const createGuessItems = (rows: GameRow[]) =>
     items[row.songItemId] = {
       id: row.songItemId,
       kind: "song",
-      label: row.songLabel,
+      label: getSpotifyTrackLabel(row.songTrackId, row.songLabel),
       value: row.songItemId,
       trackId: row.songTrackId,
     };
